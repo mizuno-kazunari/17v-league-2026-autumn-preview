@@ -1726,3 +1726,5 @@ a.team-card:hover .team-card__name {
   .sched-cards table{font-size:.8rem}
   #results-players .team-label .team-logo{width:18px;height:18px}
 }
+.schedule{grid-template-columns:minmax(0,1fr)}
+.sched-item,.sched-item__body,.sched-cards{min-width:0;max-width:100%}
