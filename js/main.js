@@ -223,6 +223,13 @@
     if (filled) filled.hidden = false;
   }
 
+  var TEAM_IDS = { "小猫熊": "koneko", "お前をApple牌": "apple", "Apple牌": "apple", "PANDAaaaZ": "pandaz", "猫雀カルテット": "nekojyaku" };
+  function teamLabel(name, id) {
+    id = id || TEAM_IDS[name];
+    var img = id ? '<img class="team-logo" src="assets/logos/team-' + escapeHtml(id) + '.png" alt="" width="32" height="32" loading="lazy">' : "";
+    return '<span class="team-label">' + img + "<span>" + escapeHtml(name) + "</span></span>";
+  }
+
   function renderTeamRanking(data) {
     var container = document.querySelector('[data-results="teamRanking"]');
     if (!container) return;
@@ -243,7 +250,7 @@
       return (
         "<tr>" +
         '<td class="' + rankClass + '">' + escapeHtml(row.rank) + "</td>" +
-        '<td class="name-cell">' + escapeHtml(row.name) + "</td>" +
+        '<td class="name-cell">' + teamLabel(row.name, row.teamId) + "</td>" +
         '<td class="score">' + formatScore(row.score) + "</td>" +
         '<td class="games">' + escapeHtml(row.games != null ? row.games : "—") + "</td>" +
         "</tr>"
@@ -273,7 +280,7 @@
         "<tr>" +
         '<td class="' + rankClass + '">' + escapeHtml(row.rank) + "</td>" +
         '<td class="name-cell">' + escapeHtml(row.name) + "</td>" +
-        '<td class="team-cell">' + escapeHtml(row.team) + "</td>" +
+        '<td class="team-cell">' + teamLabel(row.team, row.teamId) + "</td>" +
         '<td class="score">' + formatScore(row.score) + "</td>" +
         '<td class="games">' + escapeHtml(row.games != null ? row.games : "—") + "</td>" +
         "</tr>"
@@ -309,7 +316,7 @@
         '<span class="top-score-card__rank">TOP ' + escapeHtml(row.rank) + "</span>" +
         '<p class="top-score-card__score">' + formatScore(row.score) + "</p>" +
         '<p class="top-score-card__name">' + escapeHtml(row.name) + "</p>" +
-        '<p class="top-score-card__team">' + escapeHtml(row.team) + "</p>" +
+        '<p class="top-score-card__team">' + teamLabel(row.team, row.teamId) + "</p>" +
         meta +
         "</li>"
       );
