@@ -1712,3 +1712,17 @@ a.team-card:hover .team-card__name {
 
 .sched-cards .team-logo--sched { width: 48px; height: 48px; }
 @media (max-width: 600px) { .sched-cards .team-logo--sched { width: 36px; height: 36px; } }
+
+/* v3: transparent logos, logo left + text right */
+.team-label,.team-label--stack{display:inline-flex;flex-direction:row;align-items:center;gap:.35em;white-space:nowrap;text-align:left}
+.team-label .team-logo,.team-label--stack .team-logo{width:26px;height:26px;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;object-fit:contain}
+.sched-cards{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.sched-cards td,.sched-cards th{white-space:nowrap}
+.sched-cards td .sched-res{padding-left:calc(26px + .35em);text-align:left}
+.sched-cards td{text-align:left}
+@media (max-width:600px){
+  .team-label .team-logo,.team-label--stack .team-logo{width:20px;height:20px}
+  .sched-cards td .sched-res{padding-left:calc(20px + .35em)}
+  .sched-cards table{font-size:.8rem}
+  #results-players .team-label .team-logo{width:18px;height:18px}
+}

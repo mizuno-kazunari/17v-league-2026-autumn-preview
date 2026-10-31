@@ -349,7 +349,7 @@
         TEAM_ORDER.forEach(function (tid, j) {
           var r = g[tid];
           if (!r || !tds[j]) return;
-          tds[j].innerHTML = escapeHtml(r.name) +
+          tds[j].innerHTML = teamLabel(r.name, tid) +
             '<span class="sched-res' + (r.rank === 1 ? " sched-res--top" : "") + '">' +
             escapeHtml(r.rank) + "位 " + formatScore(r.score) + "</span>";
         });
