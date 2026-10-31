@@ -317,7 +317,42 @@
     showFilled(container);
   }
 
+
+  function renderSample(data) {
+    var on = !!(data && data.sample);
+    document.querySelectorAll("[data-sample-banner]").forEach(function (el) { el.hidden = !on; });
+  }
+
+  var TEAM_ORDER = ["koneko", "apple", "pandaz", "nekojyaku"];
+  function renderDays(data) {
+    var days = (data && data.days) || {};
+    Object.keys(days).forEach(function (day) {
+      var li = document.querySelector('.sched-item[data-day="' + day + '"]');
+      var games = days[day] && days[day].games;
+      if (!li || !games || !games.length) return;
+      var tags = li.querySelector(".sched-item__tags");
+      if (tags && !tags.querySelector(".tag--done")) {
+        tags.insertAdjacentHTML("afterbegin", '<span class="tag tag--done">終了' + (data.sample ? "（サンプル）" : "") + "</span>");
+      }
+      var rows = li.querySelectorAll(".sched-cards tbody tr");
+      games.forEach(function (g, i) {
+        var tr = rows[i];
+        if (!tr) return;
+        var tds = tr.querySelectorAll("td");
+        TEAM_ORDER.forEach(function (tid, j) {
+          var r = g[tid];
+          if (!r || !tds[j]) return;
+          tds[j].innerHTML = escapeHtml(r.name) +
+            '<span class="sched-res' + (r.rank === 1 ? " sched-res--top" : "") + '">' +
+            escapeHtml(r.rank) + "位 " + formatScore(r.score) + "</span>";
+        });
+      });
+    });
+  }
+
   function applyResults(data) {
+    renderSample(data);
+    renderDays(data);
     // Always keep empty UI when updatedAt is null (pre-kickoff)
     if (!data || data.updatedAt == null) {
       showEmpty(document.querySelector('[data-results="teamRanking"]'));

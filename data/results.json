@@ -1,12 +1,35 @@
 {
-  "updatedAt": null,
+  "sample": true,
+  "updatedAt": "2026-11-06T23:30:00+09:00",
   "contestId": "128015",
   "teamRanking": [
-    { "rank": 1, "teamId": "koneko", "name": "小猫熊", "score": null, "games": 0 },
-    { "rank": 2, "teamId": "apple", "name": "お前をApple牌", "score": null, "games": 0 },
-    { "rank": 3, "teamId": "pandaz", "name": "PANDAaaaZ", "score": null, "games": 0 },
-    { "rank": 4, "teamId": "nekojyaku", "name": "猫雀カルテット", "score": null, "games": 0 }
+    { "rank": 1, "teamId": "pandaz", "name": "PANDAaaaZ", "score": 37.7, "games": 2 },
+    { "rank": 2, "teamId": "koneko", "name": "小猫熊", "score": 16.9, "games": 2 },
+    { "rank": 3, "teamId": "apple", "name": "お前をApple牌", "score": -12.9, "games": 2 },
+    { "rank": 4, "teamId": "nekojyaku", "name": "猫雀カルテット", "score": -41.7, "games": 2 }
   ],
-  "playerScores": [],
-  "topScores": []
+  "playerScores": [
+    { "rank": 1, "name": "かずなり", "team": "小猫熊", "score": 68.2, "games": 1 },
+    { "rank": 2, "name": "しー", "team": "PANDAaaaZ", "score": 61.3, "games": 1 },
+    { "rank": 3, "name": "おすぎさん", "team": "猫雀カルテット", "score": 10.8, "games": 1 }
+  ],
+  "topScores": [
+    { "rank": 1, "name": "かずなり", "team": "小猫熊", "score": 68.2, "date": "11/6 1戦目", "note": "48,200点" },
+    { "rank": 2, "name": "しー", "team": "PANDAaaaZ", "score": 61.3, "date": "11/6 2戦目", "note": "41,300点" },
+    { "rank": 3, "name": "おすぎさん", "team": "猫雀カルテット", "score": 10.8, "date": "11/6 2戦目", "note": "30,800点" }
+  ],
+  "days": {
+    "2026-11-06": {
+      "games": [
+        { "koneko": { "name": "かずなり", "rank": 1, "points": 48200, "score": 68.2 },
+          "apple": { "name": "柊なゆた", "rank": 2, "points": 27900, "score": 7.9 },
+          "pandaz": { "name": "笹子ジュン", "rank": 3, "points": 16400, "score": -23.6 },
+          "nekojyaku": { "name": "まっつん", "rank": 4, "points": 7500, "score": -52.5 } },
+        { "koneko": { "name": "熊恋べりぃ", "rank": 4, "points": 8700, "score": -51.3 },
+          "apple": { "name": "シュウ.s", "rank": 3, "points": 19200, "score": -20.8 },
+          "pandaz": { "name": "しー", "rank": 1, "points": 41300, "score": 61.3 },
+          "nekojyaku": { "name": "おすぎさん", "rank": 2, "points": 30800, "score": 10.8 } }
+      ]
+    }
+  }
 }
