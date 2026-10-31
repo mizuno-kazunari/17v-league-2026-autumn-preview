@@ -1709,3 +1709,6 @@ a.team-card:hover .team-card__name {
   #results-teams .results-table{font-size:.85rem;min-width:0}
   #results-teams th,#results-teams td{white-space:nowrap;padding-left:.4em;padding-right:.4em;letter-spacing:0}
 }
+
+.sched-cards .team-logo--sched { width: 48px; height: 48px; }
+@media (max-width: 600px) { .sched-cards .team-logo--sched { width: 36px; height: 36px; } }
