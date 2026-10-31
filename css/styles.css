@@ -1728,3 +1728,6 @@ a.team-card:hover .team-card__name {
 }
 .schedule{grid-template-columns:minmax(0,1fr)}
 .sched-item,.sched-item__body,.sched-cards{min-width:0;max-width:100%}
+
+.sched-cards tbody td { text-align: center !important; }
+.sched-cards tbody td .sched-res { display: block; text-align: center; margin-left: 0 !important; padding-left: 0 !important; }
