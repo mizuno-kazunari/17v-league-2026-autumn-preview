@@ -1731,3 +1731,10 @@ a.team-card:hover .team-card__name {
 
 .sched-cards tbody td { text-align: center !important; }
 .sched-cards tbody td .sched-res { display: block; text-align: center; margin-left: 0 !important; padding-left: 0 !important; }
+
+/* equal team columns */
+.sched-cards table { table-layout: fixed; }
+.sched-cards thead th:first-child, .sched-cards tbody th { width: 4.2rem; }
+.sched-cards thead th:not(:first-child), .sched-cards tbody td { width: calc((100% - 4.2rem) / 4); }
+.sched-cards thead th .team-label { white-space: normal; justify-content: center; }
+@media (max-width: 600px) { .sched-cards table { min-width: 560px; } }
