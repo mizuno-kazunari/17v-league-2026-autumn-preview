@@ -1704,3 +1704,8 @@ a.team-card:hover .team-card__name {
   #results-players th,#results-players td{white-space:nowrap;padding-left:.3em;padding-right:.3em;letter-spacing:0}
   #results-players .team-label{gap:.3em}
 }
+@media (max-width:600px){
+  #results-teams th:last-child,#results-teams td.games{display:none}
+  #results-teams .results-table{font-size:.85rem;min-width:0}
+  #results-teams th,#results-teams td{white-space:nowrap;padding-left:.4em;padding-right:.4em;letter-spacing:0}
+}
