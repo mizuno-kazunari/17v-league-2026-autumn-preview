@@ -1695,3 +1695,10 @@ a.team-card:hover .team-card__name {
   .team-label--stack .team-logo{width:30px;height:30px}
   .team-label--stack{font-size:.85em}
 }
+
+@media (max-width:600px){
+  #results-players th:last-child,#results-players td.games{display:none}
+  #results-players .results-table{font-size:.82rem}
+  #results-players th,#results-players td{white-space:nowrap;padding-left:.4em;padding-right:.4em}
+  #results-players .team-label{gap:.3em}
+}
