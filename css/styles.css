@@ -1698,7 +1698,9 @@ a.team-card:hover .team-card__name {
 
 @media (max-width:600px){
   #results-players th:last-child,#results-players td.games{display:none}
-  #results-players .results-table{font-size:.82rem}
+  #results-players .results-table{font-size:.8rem;min-width:0}
+  #results-players .rank{width:2em}
+  #results-players .team-label .team-logo{width:18px;height:18px}
   #results-players th,#results-players td{white-space:nowrap;padding-left:.4em;padding-right:.4em}
   #results-players .team-label{gap:.3em}
 }
