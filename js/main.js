@@ -446,10 +446,27 @@
       return viewport.clientWidth;
     }
 
+    // Scroll position of a slide *inside the viewport*, not offsetLeft
+    // (offsetLeft is relative to offsetParent=body, so on wide screens
+    // goTo(0) overshoots the midpoint and scroll-snap jumps to the last slide).
+    function slideTargetLeft(i) {
+      var slide = slides[i];
+      if (!slide) return 0;
+      return viewport.scrollLeft + slide.getBoundingClientRect().left - viewport.getBoundingClientRect().left;
+    }
+
     function currentFromScroll() {
-      var w = slideWidth();
-      if (!w) return index;
-      return clamp(Math.round(viewport.scrollLeft / w));
+      var origin = viewport.getBoundingClientRect().left;
+      var best = 0;
+      var bestDist = Infinity;
+      for (var s = 0; s < slides.length; s++) {
+        var dist = Math.abs(slides[s].getBoundingClientRect().left - origin);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = s;
+        }
+      }
+      return best;
     }
 
     function updateHeight() {
@@ -484,7 +501,7 @@
 
     function goTo(i, instant) {
       index = clamp(i);
-      var left = slides[index].offsetLeft;
+      var left = slideTargetLeft(index);
       if (typeof viewport.scrollTo === "function") {
         viewport.scrollTo({
           left: left,
@@ -552,6 +569,45 @@
       }
       setTimeout(function () { wheelLock = false; }, 420);
     }, { passive: false });
+
+    // Mouse drag (Windows / PC): native overflow scrolling is touch/trackpad only.
+    var dragging = false;
+    var dragStartX = 0;
+    var dragStartScroll = 0;
+    var dragMoved = false;
+
+    viewport.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      dragging = true;
+      dragMoved = false;
+      dragStartX = e.clientX;
+      dragStartScroll = viewport.scrollLeft;
+      viewport.classList.add("is-dragging");
+      try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+
+    viewport.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 3) dragMoved = true;
+      if (dragMoved) {
+        e.preventDefault();
+        viewport.scrollLeft = dragStartScroll - dx;
+      }
+    });
+
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      viewport.classList.remove("is-dragging");
+      goTo(currentFromScroll(), true);
+    }
+
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
+    viewport.addEventListener("lostpointercapture", function () {
+      if (dragging) endDrag();
+    });
 
     window.addEventListener("resize", function () {
       goTo(index, true);
