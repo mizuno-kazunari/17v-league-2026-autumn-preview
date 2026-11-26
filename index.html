@@ -106,27 +106,58 @@
     <!-- NOTICE -->
     <section class="notice-wrap" id="notice" aria-labelledby="notice-heading">
       <div class="shell">
-        <article class="notice" role="note">
-          <h2 class="notice__title" id="notice-heading">リーグ戦再開のお知らせ</h2>
-          <p>いつもリーグ戦をご視聴いただき、ありがとうございます。</p>
-          <p>皆様の了承が確認できましたので、リーグ戦を再開いたします。</p>
-          <p>次回 第2節は、<span class="nowrap">12月6日（日）21:00 開始</span>を予定しています。</p>
-          <p>本来 <span class="nowrap">11月27日（金）</span>に予定していた試合は、誠に申し訳ありませんが、お休みとさせていただきます。</p>
-          <p>また、<span class="nowrap">11月15日（日）</span>と<span class="nowrap">11月27日（金）</span>に開催できなかった分を振り替え、2027年<span class="nowrap">1月29日（金）</span>に第7節、<span class="nowrap">2月7日（日）</span>に最終節を追加する予定です。</p>
-          <p>大変お待たせしてしまい、申し訳ありませんでした。これからも皆様と一緒に盛り上げ、楽しく麻雀が打てるよう運営一同努めてまいります。イチナナV麻雀リーグを、引き続きよろしくお願いいたします。</p>
-          <p class="notice__sign">運営<br>相川翔<br>水野一成<br>柊なゆた<br>mikicat</p>
-          <p class="notice__date"><time datetime="2026-11-26">2026年11月26日</time></p>
-        </article>
-        <article class="notice notice--past" aria-label="リーグ戦一時休止のお知らせ（過去）">
-          <h2 class="notice__title">リーグ戦一時休止のお知らせ</h2>
-          <p>いつもリーグ戦をご視聴いただき、ありがとうございます。</p>
-          <p>このたび、運営上の確認事項が発生したため、リーグ戦を一時休止させていただきます。</p>
-          <p>現在、関係各位への確認を進めており、確認が完了次第、再開時期をご案内いたします。</p>
-          <p>ご視聴いただいている皆様にはご不便をおかけいたしますが、何卒ご理解賜りますようお願い申し上げます。</p>
-          <p>再開のご案内まで、今しばらくお待ちください。</p>
-          <p class="notice__sign">運営<br>相川翔<br>水野一成<br>柊なゆた<br>mikicat</p>
-          <p class="notice__date"><time datetime="2026-11-08">2026年11月8日</time></p>
-        </article>
+        <h2 class="sr-only" id="notice-heading">お知らせ</h2>
+        <div class="notice-carousel" data-notice-carousel>
+          <div
+            class="notice-carousel__viewport"
+            data-notice-viewport
+            tabindex="0"
+            role="region"
+            aria-roledescription="カルーセル"
+            aria-label="お知らせ（左右にスライドして切り替え）"
+          >
+            <div class="notice-carousel__track">
+              <div class="notice-carousel__slide">
+                <article class="notice" role="group" aria-roledescription="スライド" aria-label="1枚目：リーグ戦再開のお知らせ">
+                  <h3 class="notice__title">リーグ戦再開のお知らせ</h3>
+                  <p>いつもリーグ戦をご視聴いただき、ありがとうございます。</p>
+                  <p>皆様の了承が確認できましたので、リーグ戦を再開いたします。</p>
+                  <p>次回 第2節は、<span class="nowrap">12月6日（日）21:00 開始</span>を予定しています。</p>
+                  <p>本来 <span class="nowrap">11月27日（金）</span>に予定していた試合は、誠に申し訳ありませんが、お休みとさせていただきます。</p>
+                  <p>また、<span class="nowrap">11月15日（日）</span>と<span class="nowrap">11月27日（金）</span>に開催できなかった分を振り替え、2027年<span class="nowrap">1月29日（金）</span>に第7節、<span class="nowrap">2月7日（日）</span>に最終節を追加する予定です。</p>
+                  <p>大変お待たせしてしまい、申し訳ありませんでした。これからも皆様と一緒に盛り上げ、楽しく麻雀が打てるよう運営一同努めてまいります。イチナナV麻雀リーグを、引き続きよろしくお願いいたします。</p>
+                  <p class="notice__sign">運営<br>相川翔<br>水野一成<br>柊なゆた<br>mikicat</p>
+                  <p class="notice__date"><time datetime="2026-11-26">2026年11月26日</time></p>
+                </article>
+              </div>
+              <div class="notice-carousel__slide">
+                <article class="notice notice--past" role="group" aria-roledescription="スライド" aria-label="2枚目：リーグ戦一時休止のお知らせ">
+                  <h3 class="notice__title">リーグ戦一時休止のお知らせ</h3>
+                  <p>いつもリーグ戦をご視聴いただき、ありがとうございます。</p>
+                  <p>このたび、運営上の確認事項が発生したため、リーグ戦を一時休止させていただきます。</p>
+                  <p>現在、関係各位への確認を進めており、確認が完了次第、再開時期をご案内いたします。</p>
+                  <p>ご視聴いただいている皆様にはご不便をおかけいたしますが、何卒ご理解賜りますようお願い申し上げます。</p>
+                  <p>再開のご案内まで、今しばらくお待ちください。</p>
+                  <p class="notice__sign">運営<br>相川翔<br>水野一成<br>柊なゆた<br>mikicat</p>
+                  <p class="notice__date"><time datetime="2026-11-08">2026年11月8日</time></p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="notice-carousel__controls">
+            <button type="button" class="notice-carousel__btn notice-carousel__btn--prev" data-notice-prev aria-label="前のお知らせ">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="notice-carousel__dots" role="group" aria-label="お知らせの位置">
+              <button type="button" class="notice-carousel__dot is-active" data-notice-dot="0" aria-label="1枚目：リーグ戦再開のお知らせ" aria-current="true"></button>
+              <button type="button" class="notice-carousel__dot" data-notice-dot="1" aria-label="2枚目：リーグ戦一時休止のお知らせ"></button>
+            </div>
+            <button type="button" class="notice-carousel__btn notice-carousel__btn--next" data-notice-next aria-label="次のお知らせ">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <p class="notice-carousel__hint">左右にスライドで、過去のお知らせを表示します</p>
+        </div>
       </div>
     </section>
 
