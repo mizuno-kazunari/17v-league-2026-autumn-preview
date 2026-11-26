@@ -1012,6 +1012,31 @@ a:hover { color: var(--c-accent-deep); }
   color: var(--c-accent-deep);
   background: var(--c-accent-soft);
 }
+.tag--cancelled {
+  border-color: #d0d0d0;
+  color: var(--c-ink-mute);
+  background: #f0f0f0;
+}
+.sched-item--cancelled {
+  opacity: 0.82;
+  background: #f7f7f7;
+  box-shadow: none;
+}
+.sched-item--cancelled:hover {
+  border-color: var(--c-border);
+  transform: none;
+}
+.sched-item--cancelled .sched-item__day {
+  background: #eeeeee;
+  border-color: #d0d0d0;
+}
+.sched-item--cancelled .sched-item__day .num,
+.sched-item--cancelled .sched-item__day .unit {
+  color: var(--c-ink-mute);
+}
+.sched-item--cancelled .sched-cards {
+  opacity: 0.85;
+}
 @media (max-width: 520px) {
   .sched-item {
     grid-template-columns: 1fr;
@@ -1751,4 +1776,7 @@ a.team-card:hover .team-card__name {
 .notice p{margin:0 0 .9rem}
 .notice__sign{margin-top:1.6rem!important;text-align:left;line-height:1.8}
 .notice__date{text-align:left}
-@media (max-width:600px){.notice{padding:1.25rem 1rem}.notice__title{font-size:1.15rem}}
+.notice + .notice{margin-top:1.25rem}
+.notice--past{border-color:var(--c-border);box-shadow:var(--shadow-soft)}
+.notice--past .notice__title{color:var(--c-ink-soft);border-bottom-color:var(--c-border);font-size:1.2rem}
+@media (max-width:600px){.notice{padding:1.25rem 1rem}.notice__title{font-size:1.15rem}.notice--past .notice__title{font-size:1.05rem}}

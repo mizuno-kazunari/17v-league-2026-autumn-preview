@@ -9,14 +9,14 @@ import { pathToFileURL } from "node:url";
 const src = fs.readFileSync(new URL("../js/main.js", import.meta.url), "utf8");
 
 const MATCH_DAYS = [
-  { ymd: "2026-11-06", startIso: "2026-11-06T21:00:00+09:00", sub: "2026年11月6日（金）21:00 配信開始予定（Asia/Tokyo）" },
-  { ymd: "2026-11-15", startIso: "2026-11-15T21:00:00+09:00", sub: "2026年11月15日（日） 21:00 配信開始予定（Asia/Tokyo）" },
-  { ymd: "2026-11-27", startIso: "2026-11-27T21:00:00+09:00", sub: "2026年11月27日（金） 21:00 配信開始予定（Asia/Tokyo）" },
-  { ymd: "2026-12-06", startIso: "2026-12-06T21:00:00+09:00", sub: "2026年12月6日（日） 配信開始予定（Asia/Tokyo）※時刻は追って掲載" },
-  { ymd: "2026-12-18", startIso: "2026-12-18T21:00:00+09:00", sub: "2026年12月18日（金） 配信開始予定（Asia/Tokyo）※時刻は追って掲載" },
-  { ymd: "2026-12-27", startIso: "2026-12-27T21:00:00+09:00", sub: "2026年12月27日（日） 配信開始予定（Asia/Tokyo）※時刻は追って掲載" },
-  { ymd: "2027-01-08", startIso: "2027-01-08T21:00:00+09:00", sub: "2027年1月8日（金） 配信開始予定（Asia/Tokyo）※時刻は追って掲載" },
-  { ymd: "2027-01-17", startIso: "2027-01-17T21:00:00+09:00", sub: "2027年1月17日（日）・最終戦 配信開始予定（Asia/Tokyo）※時刻は追って掲載" }
+  { ymd: "2026-11-06", startIso: "2026-11-06T21:00:00+09:00", sub: "2026年11月6日（金）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2026-12-06", startIso: "2026-12-06T21:00:00+09:00", sub: "2026年12月6日（日）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2026-12-18", startIso: "2026-12-18T21:00:00+09:00", sub: "2026年12月18日（金）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2026-12-27", startIso: "2026-12-27T21:00:00+09:00", sub: "2026年12月27日（日）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2027-01-08", startIso: "2027-01-08T21:00:00+09:00", sub: "2027年1月8日（金）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2027-01-17", startIso: "2027-01-17T21:00:00+09:00", sub: "2027年1月17日（日）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2027-01-29", startIso: "2027-01-29T21:00:00+09:00", sub: "2027年1月29日（金）21:00 開始（Asia/Tokyo）" },
+  { ymd: "2027-02-07", startIso: "2027-02-07T21:00:00+09:00", sub: "2027年2月7日（日）・最終節 21:00 開始（Asia/Tokyo）" }
 ];
 
 function tokyoYmd(ms) {
@@ -85,6 +85,13 @@ assert.match(src, /function resolveNextMatch\(now\)/);
 assert.match(src, /if \(now >= start\)/);
 assert.doesNotMatch(src, /if \(findMatchByYmd\(today\)\) \{\s*showStatus\(root, "対局中"\)/);
 
+assert.match(src, /var LEAGUE_PAUSED = false;/);
+assert.doesNotMatch(src, /ymd: "2026-11-15"/);
+assert.doesNotMatch(src, /ymd: "2026-11-27"/);
+assert.match(src, /ymd: "2026-12-06"/);
+assert.match(src, /ymd: "2027-01-29"/);
+assert.match(src, /ymd: "2027-02-07"/);
+
 const cases = [
   {
     name: "Nov6 20:59:59 JST → countdown to kickoff",
@@ -112,24 +119,56 @@ const cases = [
     }
   },
   {
-    name: "Nov7 00:00:00 JST → countdown to Nov15",
+    name: "Nov7 00:00:00 JST → countdown to Dec6 (Nov15 cancelled)",
     now: msTokyo("2026-11-07", "00:00:00"),
     expect: (s) => {
       assert.equal(s.kind, "countdown");
-      assert.equal(s.target, msTokyo("2026-11-15", "21:00:00"));
+      assert.equal(s.target, msTokyo("2026-12-06", "21:00:00"));
     }
   },
   {
-    name: "non-match morning still countdowns",
-    now: msTokyo("2026-11-10", "10:00:00"),
+    name: "cancelled Nov15 is not a match day → still countdown to Dec6",
+    now: msTokyo("2026-11-15", "21:00:00"),
     expect: (s) => {
       assert.equal(s.kind, "countdown");
-      assert.equal(s.target, msTokyo("2026-11-15", "21:00:00"));
+      assert.equal(s.target, msTokyo("2026-12-06", "21:00:00"));
+    }
+  },
+  {
+    name: "off day Nov27 is not a match day → still countdown to Dec6",
+    now: msTokyo("2026-11-27", "21:00:00"),
+    expect: (s) => {
+      assert.equal(s.kind, "countdown");
+      assert.equal(s.target, msTokyo("2026-12-06", "21:00:00"));
+    }
+  },
+  {
+    name: "non-match morning still countdowns to Dec6",
+    now: msTokyo("2026-11-26", "17:00:00"),
+    expect: (s) => {
+      assert.equal(s.kind, "countdown");
+      assert.equal(s.target, msTokyo("2026-12-06", "21:00:00"));
+    }
+  },
+  {
+    name: "Dec6 20:59:59 JST → countdown to next match",
+    now: msTokyo("2026-12-06", "20:59:59"),
+    expect: (s) => {
+      assert.equal(s.kind, "countdown");
+      assert.equal(s.target, msTokyo("2026-12-06", "21:00:00"));
+    }
+  },
+  {
+    name: "Dec6 21:00:00 JST → 対局中",
+    now: msTokyo("2026-12-06", "21:00:00"),
+    expect: (s) => {
+      assert.equal(s.kind, "live");
+      assert.equal(s.text, "対局中");
     }
   },
   {
     name: "after final match day → リーグ終了",
-    now: msTokyo("2027-01-18", "00:00:00"),
+    now: msTokyo("2027-02-08", "00:00:00"),
     expect: (s) => {
       assert.equal(s.kind, "finished");
       assert.equal(s.text, "リーグ終了");
@@ -137,7 +176,7 @@ const cases = [
   },
   {
     name: "final match day after 21:00 → 対局中 (not finished yet)",
-    now: msTokyo("2027-01-17", "22:00:00"),
+    now: msTokyo("2027-02-07", "22:00:00"),
     expect: (s) => {
       assert.equal(s.kind, "live");
       assert.equal(s.text, "対局中");
