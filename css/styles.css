@@ -1777,7 +1777,7 @@ a.team-card:hover .team-card__name {
   margin:0 auto;
   min-width:0;
   overflow:hidden;
-  padding:0.55rem 0.35rem 0;
+  padding:0.55rem 0.35rem 0.35rem;
 }
 .notice-carousel__viewport{
   overflow-x:auto;
@@ -1864,14 +1864,6 @@ a.team-card:hover .team-card__name {
   transition:background .2s ease,transform .2s ease;
 }
 .notice-carousel__dot.is-active{background:var(--c-accent);border-color:var(--c-accent);transform:scale(1.1)}
-.notice-carousel__hint{
-  margin:0.55rem 0 0;
-  text-align:center;
-  font-size:0.8rem;
-  color:var(--c-ink-mute);
-  line-height:1.6;
-  text-wrap:balance;
-}
 @media (max-width:600px){
   .notice{padding:1.25rem 1rem}
   .notice__title{font-size:1.15rem}
